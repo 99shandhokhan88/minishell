@@ -11,7 +11,7 @@ int		error_redir(char *str, int *i, char c)
 		count++;
 		(*i)++;
 	}
-	if ((c == '>' && count > 2) || (c == '<' && count > 1))
+	if ((c == '>' && count > 2) || (c == '<' && count > 2))
 		return (1);
 	while (str[(*i)] == ' ')
 		(*i)++;
@@ -42,7 +42,7 @@ int		parser_error(char *str)
 		{
 			if (error_redir(str, &i, str[i]))
 			{
-				g_status = 1;
+				g_exit = 1;
 				printf("Error: wrong or unsupported redirection\n");
 				return (1);
 			}

@@ -46,7 +46,7 @@ void	redir_to(char *str, int i, char **input, t_data *data)
 	if (fd < 0)
 	{
 		ft_putstr_fd("Error: wrong permissions\n", 2);
-		g_status = 1;
+		g_exit = 1;
 		data->redir = 0;
 		return ;
 	}
@@ -74,7 +74,7 @@ void	redir_to_append(char *str, int i, char **input, t_data *data)
 	if (fd < 0)
 	{
 		ft_putstr_fd("Error: wrong permissions\n", 2);
-		g_status = 1;
+		g_exit = 1;
 		data->redir = 0;
 		return ;
 	}
@@ -101,7 +101,7 @@ void	redir_from(char *str, int i, char **input, t_data *data)
 	if (fd < 0)
 	{
 		ft_putstr_fd("Error: Wrong file name or wrong permissions\n", 2);
-		g_status = 1;
+		g_exit = 1;
 		data->redir = 0;
 		return ;
 	}

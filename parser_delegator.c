@@ -47,14 +47,9 @@ int			check_special(char **input, int *i, t_data *data)
 	if ((*input)[*i] == '\'')
 	{
 		(*i)++;
-		//while ((*input)[*i] != '\'')
-		//	(*i)++;
+	//	while ((*input)[*i] != '\'')
+	//		(*i)++;
 	}
-	//else if ((*input)[*i] == ';')
-	//{
-	//	parser_semi((*input), *i, data);
-	//	return (1);
-	//}
 	(*i)++;
 	return (0);
 }
@@ -63,7 +58,6 @@ int			parser_delegator(char *input, t_data *data, int piped)
 {
 	int		i;
 	int		slash_count;
-	//int	flag = 0;
 
 	i = 0;
 	while (input[i])
@@ -71,12 +65,9 @@ int			parser_delegator(char *input, t_data *data, int piped)
 		if (input[i] == '"' || input[i] == '\'')
 		{
 			i++;
-			//flag = 1;
 			while (input[i] != '"' && input[i] != '\'')
 			{
 				slash_count = 0;
-				//while (input[i] == '\\' && ++i)
-				//	slash_count++;
 				if (input[i] == '$' && !(slash_count % 2))
 					parser_variable(&input, &i, data);
 				if (slash_count && !(slash_count % 2))

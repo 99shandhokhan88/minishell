@@ -16,12 +16,7 @@ void	copy_newsplit(char *src, char *dst, char quote)
 		{
 			quote = *(src++);
 			while (*src != quote)
-			{
-				if (*src == '\\' && (*(src + 1) == quote
-						|| *(src + 1) == '\\' || *(src + 1) == '$'))
-					src++;
 				*(dst++) = *(src++);
-			}
 			src++;
 		}
 		else

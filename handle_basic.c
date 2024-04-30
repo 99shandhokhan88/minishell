@@ -41,7 +41,7 @@ void		free_inputs(char **inputs)
 	free(inputs);
 }
 
-void		close_fds(t_data *data)
+void		close_reds(t_data *data)
 {
 	if (data->fd_in != 0)
 	{
@@ -58,8 +58,8 @@ void		close_fds(t_data *data)
 void		exit_pipe(t_data *data)
 {
 	free_inputs(data->env);
-	if (g_user_input)
-		free(g_user_input);
+	//if (g_user_input)
+	//	free(g_user_input);
 	free(data->pwd);
 	exit(EXIT_SUCCESS);
 }
@@ -170,6 +170,18 @@ int	handle_basic(char *clean_input, t_data *data, int piped)
 
 */
 
+void setup_fds(int oldfd[2])
+{
+    oldfd[0] = dup(1);
+    oldfd[1] = dup(0);
+}
+
+void	close_fds(int oldfd[2])
+{
+	close(oldfd[0]);
+	close(oldfd[1]);
+}
+
 int			handle_basic(char *clean_input, t_data *data, int piped)
 {
 	char	**inputs;
@@ -180,20 +192,20 @@ int			handle_basic(char *clean_input, t_data *data, int piped)
 		free(clean_input);
 		return (0);
 	}
-	oldfd[0] = dup(1);
-	oldfd[1] = dup(0);
+	setup_fds(oldfd);
 	clean_input = input_cleaner(clean_input);
 	parser_redir(&clean_input, data);
 	clean_input = input_cleaner(clean_input);
 	inputs = input_split(clean_input);
+	if (!inputs)
+		exit(EXIT_FAILURE);
 	free(clean_input);
 	choose_action(inputs, data);
 	free_inputs(inputs);
 	dup2(oldfd[0], 1);
 	dup2(oldfd[1], 0);
-	close_fds(data);
-	close(oldfd[0]);
-	close(oldfd[1]);
+	close_reds(data);
+	close_fds(oldfd);
 	if (piped)
 		exit_pipe(data);
 	return (0);

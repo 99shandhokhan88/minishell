@@ -77,7 +77,7 @@ void			parser_variable(char **input_address, int *i, t_data *data)
 	len = get_filename_len(&(input_address[0][*i + 1]));
 	var_name = ft_substr(*input_address, *i + 1, len);
 	if (len == 1 && input_address[0][*i + 1] == '?')
-		var_value = ft_itoa(g_status);
+		var_value = ft_itoa(g_exit);
 	else if (len)
 		var_value = get_value(var_name, data);
 	else

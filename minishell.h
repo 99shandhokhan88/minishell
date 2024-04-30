@@ -7,7 +7,6 @@
 # include <termios.h>
 # include <stdint.h>
 # include <sys/ioctl.h>
-
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/wait.h>
@@ -34,9 +33,7 @@
 # include <termios.h>
 # include <stdint.h>
 
-extern int				g_status;
-extern char			*g_user_input;
-extern int				g_quit;
+extern int	g_exit;
 
 typedef	struct	s_data
 {
@@ -61,7 +58,7 @@ size_t	custom_strspn(const char *str, const char *accept);
 int				envlen(char **env);
 void			free_env(char **env);
 char			**dup_env(char **env);
-void			close_fds(t_data *data);
+void			close_reds(t_data *data);
 
 int				parser_start(char *str, t_data *data);
 void			quote_len(char **str, int *i, char quote);

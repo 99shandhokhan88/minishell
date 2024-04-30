@@ -15,8 +15,6 @@ static char		*find_next_input(char *str)
 			while (*str != quote)
 			{
 				slash_count = 0;
-				//while (*str == '\\' && quote == '"' && ++slash_count)
-				//	str++;
 				if (slash_count && !(slash_count % 2))
 					str--;
 				str++;
@@ -40,13 +38,10 @@ static size_t	stringcount(char *str)
 	{
 		if ((*str == '"') || (*str == '\''))
 		{
-			//printf("%c\n", *str);
 			quote = *(str++);
 			while (*str != quote)
 			{
 				slash_count = 0;
-				while (*str == '\\' && quote == '"' && ++slash_count)
-					str++;
 				if (slash_count && !(slash_count % 2))
 					str--;
 				str++;

@@ -75,5 +75,5 @@ void	handle_exec(char **inputs, t_data *data)
 	}
 	//g_status = WEXITSTATUS(status);
 	//if (g_quit)
-	g_status = WEXITSTATUS(status);
+	g_exit = WEXITSTATUS(status);
 }

@@ -14,7 +14,7 @@ void	handle_echo(char **args)
 
 	i = 1;
 	n_flag = 0;
-	g_status = 0;
+	g_exit = 0;
 	while (args[i] && !ft_strcmp(args[i], "-n") && i++)
 		n_flag = 1;
 	while (args[i])

@@ -29,7 +29,7 @@ char	**dup_env(char **env)
 	int		i;
 
 	i = 0;
-	data_env = malloc(sizeof(char *) * envlen(env));
+	data_env = alloc_with_zero(sizeof(char *), envlen(env));
 	if (!data_env)
 		exit(EXIT_FAILURE);
 	while (env[i])
@@ -59,11 +59,11 @@ void	handle_env(char **env)
 				write(1, &env[i][j], 1);
 				j++;
 			}
-			ft_putchar('\n');
+			write(1, "\n", 1);
 		}
 		i++;
 	}
-	g_status = 0;
+	g_exit = 0;
 }
 
 int	init_envv(char *env[], t_data *s_hell)

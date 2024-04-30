@@ -11,5 +11,5 @@ void	handle_pwd(void)
 	path = getcwd(NULL, 0);
 	printf("%s\n", path);
 	free(path);
-	g_status = 0;
+	g_exit = 0;
 }

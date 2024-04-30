@@ -3,7 +3,7 @@
 
 void	error_sentence(char *str, int status)
 {
-	g_status = status;
+	g_exit = status;
 	ft_putstr_fd(str, 2);
 }
 
@@ -25,18 +25,18 @@ int		is_number(char *str)
 
 void	handle_exit(char **inputs, t_data *data)
 {
-	g_status = 0;
+	g_exit = 0;
 	if (inputs[1])
 	{
 		if (is_number(inputs[1]))
 		{
 			if (inputs[2])
 				return (error_sentence("\tminishell: too many argument\n", 2));
-			g_status = ft_atoi(inputs[1]);
-			if (g_status > 255)
-				g_status = 255;
-			else if (g_status < 0)
-				g_status = 255;
+			g_exit = ft_atoi(inputs[1]);
+			if (g_exit > 255)
+				g_exit = 255;
+			else if (g_exit < 0)
+				g_exit = 255;
 		}
 		else
 			error_sentence("\t\tminishell: numeric argument is required\n", 2);
@@ -44,5 +44,7 @@ void	handle_exit(char **inputs, t_data *data)
 	free_env(inputs);
 	//free(data->pwd);
 	free_env(data->env);
-	exit(g_status);
+	//free_shell(s_hell);
+	//free_inputs(inputs);
+	exit(g_exit);
 }

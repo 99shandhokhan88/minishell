@@ -104,5 +104,5 @@ void	handle_export(char **inputs, t_data *data)
 	}
 	else
 		export_alone(data);
-	g_status = 0;
+	g_exit = 0;
 }

@@ -1,9 +1,7 @@
 
 #include "minishell.h"
 
-int				g_status = 0;
-char			*g_user_input = 0;
-int				g_quit = 0;
+int	g_exit = 0;
 
 void	end_of_file(t_data *data, char *user_input)
 {
@@ -36,7 +34,7 @@ int		main(int ac, char **av, char **env)
 	while (env)
 	{
 		setup_signals();
-		input = readline("vzashev$: ");
+		input = readline("minishell$: ");
 		if (input && input[0] && custom_strspn(input, " ") != len_str(input))
 			add_history(input);
 		if (input == NULL)
