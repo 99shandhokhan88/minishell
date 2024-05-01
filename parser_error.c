@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_error.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vzashev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/01 18:59:11 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/01 19:00:23 by vzashev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-int		error_redir(char *str, int *i, char c)
+int	error_redir(char *str, int *i, char c)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (str[(*i)] == c)
@@ -22,16 +33,16 @@ int		error_redir(char *str, int *i, char c)
 
 void	skip_quotes(char *str, int *i)
 {
-	char quote;
+	char	quote;
 
 	quote = str[(*i)++];
 	while (str[(*i)] != quote)
 		(*i)++;
 }
 
-int		parser_error(char *str)
+int	parser_error(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

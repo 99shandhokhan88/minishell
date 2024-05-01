@@ -1,31 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/01 18:23:27 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/01 18:27:50 by vzashev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-**	In handle_cd :
-**		chdir returns -1 if it fails to change directory
-**		return(0) === error
-*/
-
-int		cd_minus(t_data *data)
+int	cd_minus(t_data *data)
 {
-	if (var_index("OLDPWD=", data) < 0 ||
-	chdir((strchr(data->env[var_index("OLDPWD=", data)], '=') + 1)) == -1)
+	if (var_index("OLDPWD=", data) < 0
+		|| chdir((strchr(data->env[var_index("OLDPWD=", data)], '=')
+				+ 1)) == -1)
 		return (0);
 	change_pwd(data);
 	return (1);
 }
 
-int		cd_alone(t_data *data)
+int	cd_alone(t_data *data)
 {
-	if (var_index("HOME=", data) < 0 ||
-	chdir((strchr(data->env[var_index("HOME=", data)], '=') + 1)) == -1)
+	if (var_index("HOME=", data) < 0
+		|| chdir((strchr(data->env[var_index("HOME=", data)], '=') + 1)) == -1)
 		return (0);
 	change_pwd(data);
 	return (1);
 }
 
-int		cd_path(char **args, t_data *data)
+int	cd_path(char **args, t_data *data)
 {
 	if (chdir(args[1]) == -1)
 		return (0);

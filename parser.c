@@ -1,19 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vzashev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/01 18:54:49 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/01 18:56:37 by vzashev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-void			quote_len(char **str, int *i, char quote)
+void	quote_len(char **str, int *i, char quote)
 {
-	int slash_count;
+	int	slash_count;
 
 	while (**str != quote && **str)
 	{
 		slash_count = 0;
-		//while (quote == '"' && **str == '\\')
-		//{
-		//	(*i)++;
-		//	(*str)++;
-		//	slash_count++;
-		//}
 		if (slash_count && !(slash_count % 2))
 		{
 			(*str)--;
@@ -24,7 +29,7 @@ void			quote_len(char **str, int *i, char quote)
 	}
 }
 
-static int		input_len(char *str)
+static int	input_len(char *str)
 {
 	int		i;
 	char	quote;
@@ -34,8 +39,6 @@ static int		input_len(char *str)
 	{
 		if (*str == ' ' && (*(str + 1) == ' ' || *(str + 1) == '\0'))
 			str++;
-		//else if (*str == '\\' && (str += 2))
-		//	i += 4;
 		else if (*str == '"' || *str == '\'')
 		{
 			quote = *(str++);
@@ -51,41 +54,20 @@ static int		input_len(char *str)
 	return (i);
 }
 
-void			copy_inside_quotes(char **src, char **dst, char quote)
+void	copy_inside_quotes(char **src, char **dst, char quote)
 {
-	int slash_count;
+	int	slash_count;
 
 	while (**src != quote)
 	{
 		slash_count = 0;
-		//while (**src == '\\' && quote == '"')
-		//{
-		//	*((*dst)++) = *((*src)++);
-		//	slash_count++;
-		//}
 		if (slash_count && !(slash_count % 2))
 			*((*dst)--) = *((*src)--);
 		*((*dst)++) = *((*src)++);
 	}
 }
 
-/*
-void			escape_char(char **dst, char **src)
-{
-	char	quote;
-
-	(*src)++;
-	if (**src == '\'')
-		quote = '"';
-	else
-		quote = '\'';
-	*((*dst)++) = quote;
-	*((*dst)++) = *((*src)++);
-	*((*dst)++) = quote;
-}
-*/
-
-void			input_copy(char *dst, char *src)
+void	input_copy(char *dst, char *src)
 {
 	char	quote;
 
@@ -100,15 +82,13 @@ void			input_copy(char *dst, char *src)
 			copy_inside_quotes(&src, &dst, quote);
 			*(dst++) = *(src++);
 		}
-		//else if (*src == '\\' && *(src + 1))
-		//	escape_char(&dst, &src);
 		else
 			*(dst++) = *(src++);
 	}
 	*dst = '\0';
 }
 
-char			*input_cleaner(char *str)
+char	*input_cleaner(char *str)
 {
 	int		len;
 	char	*clean_input;
@@ -128,7 +108,7 @@ char			*input_cleaner(char *str)
 	return (clean_input);
 }
 
-int				parser_start(char *input, t_data *data)
+int	parser_start(char *input, t_data *data)
 {
 	char	*clean_input;
 

@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_redir2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vzashev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/01 19:10:25 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/01 19:15:54 by vzashev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-int		get_name_len(char *str)
+int	get_name_len(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != ' ' && str[i] != '|' && str[i] != ';' && str[i] != '>' &&
-			str[i] != '<' && str[i])
+		str[i] != '<' && str[i])
 	{
 		if (str[i] == '\'')
 		{
@@ -192,7 +203,6 @@ void	here_doc(const char *delimiter)
 	fd_in = open_tmp_file_for_reading();
 	close(fd_in);
 }
-
 
 void	handle_redir(char **input, int i, t_data *data)
 {

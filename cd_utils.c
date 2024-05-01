@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd_utils.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/01 18:19:39 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/01 18:20:31 by vzashev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -19,21 +30,16 @@ void	change_env_oldpwd(t_data *s_hell, char **cwd)
 
 	pwd = ft_strjoin("PWD=", *cwd);
 	if (!pwd)
-	{
 		printf("Error: Failed to allocate memory for pwd\n");
-		return ;
-	}
 	oldpwd = ft_strjoin("OLD", pwd);
 	if (!oldpwd)
 	{
 		printf("Error: Failed to allocate memory for oldpwd\n");
 		free(pwd);
-		return ;
 	}
 	replace_var(oldpwd, s_hell, var_index("OLDPWD=", s_hell));
 	free(oldpwd);
 	free(pwd);
-
 }
 
 void	change_pwd(t_data *s_hell)
@@ -43,10 +49,7 @@ void	change_pwd(t_data *s_hell)
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-	{
 		printf("Error retrieving current directory\n");
-		return ;
-	}
 	change_env_oldpwd(s_hell, &cwd);
 	if (var_index("PWD", s_hell) >= 0)
 	{

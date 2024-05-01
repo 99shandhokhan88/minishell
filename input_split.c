@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_split.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vzashev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/01 18:50:59 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/01 18:52:15 by vzashev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-static char		*find_next_input(char *str)
+static char	*find_next_input(char *str)
 {
 	char	quote;
 	int		slash_count;
@@ -53,7 +64,7 @@ static size_t	stringcount(char *str)
 	return (i);
 }
 
-char			*newsplit(char *src)
+char	*newsplit(char *src)
 {
 	int		len;
 	char	*dst;
@@ -68,7 +79,7 @@ char			*newsplit(char *src)
 	return (dst);
 }
 
-char			**input_split(char *str)
+char	**input_split(char *str)
 {
 	char	**inputs;
 	size_t	count;

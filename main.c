@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vzashev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/01 18:52:34 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/01 18:53:18 by vzashev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -14,14 +25,12 @@ void	end_of_file(t_data *data, char *user_input)
 
 void	data_init(t_data *data) //, char **env
 {
-	//data->env = dup_env(env);
-	//data->pwd = getcwd(NULL, 0);
 	data->fd_in = 0;
 	data->fd_out = 1;
 	data->redir = 1;
 }
 
-int		main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
 	t_data	data;
 	char	*input;
@@ -43,8 +52,6 @@ int		main(int ac, char **av, char **env)
 			continue ;
 		if (input && input[0] && custom_strspn(input, " ") != len_str(input))
 			parser_start(input, &data);
-		//free(input);
 	}
-	//free_shell(&data);
 	return (0);
 }

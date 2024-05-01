@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_redir.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vzashev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/01 19:12:25 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/01 19:15:05 by vzashev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-void		make_filename(char *src, char *dst, int i, int k)
+void	make_filename(char *src, char *dst, int i, int k)
 {
-	while (src[i] != ' ' && src[i] != '|' && src[i] != ';' && src[i] != '>' &&
-			src[i] != '<' && src[i])
+	while (src[i] != ' ' && src[i] != '|' && src[i] != ';' && src[i] != '>'
+		&& src[i] != '<' && src[i])
 	{
 		if (src[i] == '\'')
 		{
@@ -28,7 +39,7 @@ void		make_filename(char *src, char *dst, int i, int k)
 	dst[k] = '\0';
 }
 
-char		*get_filename(char *str, int *j)
+char	*get_filename(char *str, int *j)
 {
 	int		i;
 	int		k;
@@ -45,40 +56,33 @@ char		*get_filename(char *str, int *j)
 	return (filename);
 }
 
-void		remove_redir_input(char **input_address, int i, int j)
+void	remove_redir_input(char **input_address, int i, int j)
 {
-	char *tmp;
-	char *new_input;
+	char	*tmp;
+	char	*new_input;
 
 	tmp = ft_substr(input_address[0], 0, i);
 	new_input = ft_strjoin(tmp, &(input_address[0][j + 1]));
 	free(tmp);
-	//free(*input_address);
-	//*input_address = new_input;
 	*input_address = strcpy(*input_address, new_input);
 	if (new_input != NULL)
 		free(new_input);
 }
 
-void		parser_redir_quotes(char *str, int *i, char quote)
+void	parser_redir_quotes(char *str, int *i, char quote)
 {
-	int slash_count;
+	int	slash_count;
 
 	while (str[*i] != quote)
 	{
 		slash_count = 0;
-		//while (str[*i] == '\\' && quote == '"')
-		//{
-		//	slash_count++;
-		//	(*i)++;
-		//}
 		if (slash_count && !(slash_count % 2))
 			(*i)--;
 		(*i)++;
 	}
 }
 
-int			parser_redir(char **input_address, t_data *data)
+int	parser_redir(char **input_address, t_data *data)
 {
 	int		i;
 	char	quote;
@@ -97,7 +101,6 @@ int			parser_redir(char **input_address, t_data *data)
 			handle_redir(input_address, i, data);
 			return (1);
 		}
-		//should_escape(&i, str);
 	}
 	return (0);
 }

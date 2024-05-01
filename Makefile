@@ -3,7 +3,7 @@ SRCS	= main.c
 
 SRCS	+= parser.c input_split.c input_split2.c parser_delegator.c parser_variable.c parser_redir.c
 
-SRCS	+= utils.c parser2.c parser_redir2.c handle_basic.c parser_error.c parser_redir3.c
+SRCS	+= utils.c parser_redir2.c handle_basic.c parser_error.c
 
 SRCS	+= echo.c pwd.c cd_utils.c cd.c exec.c exec_utils.c env.c
 

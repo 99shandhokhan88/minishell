@@ -1,14 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/01 18:35:18 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/01 18:43:52 by vzashev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-**	CUT "PATH=" if PATH envVAr exists
-**	split remaining string at every ':'
-**	try executing strjoin(paths[i], inputs[0]) for every path existing
-**	if nothing happend return (error)
-*/
-
-int		execute_2(char **inputs, t_data *data)
+int	execute_2(char **inputs, t_data *data)
 {
 	int			i;
 	char		**paths;
@@ -22,8 +26,8 @@ int		execute_2(char **inputs, t_data *data)
 	while (paths[i])
 	{
 		stat(paths[i], &statounet);
-		if ((statounet.st_mode & S_IXUSR) &&
-		(execve(paths[i], inputs, data->env) != -1))
+		if ((statounet.st_mode & S_IXUSR)
+			&& (execve(paths[i], inputs, data->env) != -1))
 			return (0);
 		i++;
 	}
@@ -31,7 +35,7 @@ int		execute_2(char **inputs, t_data *data)
 	return (1);
 }
 
-int		execute(char **inputs, t_data *data)
+int	execute(char **inputs, t_data *data)
 {
 	int			index;
 	struct stat	statounet;
@@ -39,14 +43,12 @@ int		execute(char **inputs, t_data *data)
 	statounet.st_mode = 0;
 	index = var_index("PATH=", data);
 	stat(inputs[0], &statounet);
-	if (ft_strchr(inputs[0], '/') && (statounet.st_mode & S_IXUSR) &&
-	(execve(inputs[0], &inputs[0], data->env) != -1))
+	if (ft_strchr(inputs[0], '/') && (statounet.st_mode & S_IXUSR)
+		&& (execve(inputs[0], &inputs[0], data->env) != -1))
 		return (0);
 	else if (index >= 0)
-	{
 		if (!execute_2(inputs, data))
 			return (0);
-	}
 	return (1);
 }
 
@@ -68,12 +70,6 @@ void	handle_exec(char **inputs, t_data *data)
 	else if (pid < 0)
 		exit(EXIT_FAILURE);
 	else
-	{
-		//sig_exec_init();
-		//waitpid(pid, &status, 0);
 		waitpid(pid, &status, 0);
-	}
-	//g_status = WEXITSTATUS(status);
-	//if (g_quit)
 	g_exit = WEXITSTATUS(status);
 }

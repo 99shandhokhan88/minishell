@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vzashev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/01 18:46:15 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/01 18:47:12 by vzashev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-int		check_export(char *str)
+int	check_export(char *str)
 {
 	int	i;
 
@@ -17,10 +28,10 @@ int		check_export(char *str)
 	return (1);
 }
 
-int		print_export(char **env)
+int	print_export(char **env)
 {
 	int	i;
-	int j;
+	int	j;
 	int	equal;
 
 	i = -1;

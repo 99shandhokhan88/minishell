@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/01 18:34:23 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/01 18:35:05 by vzashev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -25,7 +36,7 @@ char	**gen_paths(int index, t_data *data, char *input)
 	return (paths);
 }
 
-int		check_exec_path(char **inputs, t_data *data)
+int	check_exec_path(char **inputs, t_data *data)
 {
 	int			i;
 	int			index;
@@ -53,7 +64,7 @@ int		check_exec_path(char **inputs, t_data *data)
 	return (0);
 }
 
-int		check_exec(char **inputs, t_data *data)
+int	check_exec(char **inputs, t_data *data)
 {
 	int			ret;
 	struct stat	statounet;
@@ -61,8 +72,8 @@ int		check_exec(char **inputs, t_data *data)
 	statounet.st_mode = 0;
 	ret = 0;
 	stat(inputs[0], &statounet);
-	if (ft_strchr(inputs[0], '/') && (statounet.st_mode & S_IXUSR) &&
-	!(statounet.st_mode & __S_IFDIR))
+	if (ft_strchr(inputs[0], '/') && (statounet.st_mode & S_IXUSR)
+		&& !(statounet.st_mode & __S_IFDIR))
 		ret = 1;
 	else
 		ret = check_exec_path(inputs, data);
