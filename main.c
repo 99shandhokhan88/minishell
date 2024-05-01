@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzashev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 18:52:34 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/01 18:53:18 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/01 19:28:07 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	end_of_file(t_data *data, char *user_input)
 	exit(EXIT_SUCCESS);
 }
 
-void	data_init(t_data *data) //, char **env
+void	data_init(t_data *data)
 {
 	data->fd_in = 0;
 	data->fd_out = 1;

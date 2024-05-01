@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzashev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 18:46:15 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/01 18:47:12 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/01 19:29:34 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	print_export(char **env)
 		ft_putstr("declare -x ");
 		while (env[i][j])
 		{
-			if (env[i][j] == '\\' || env[i][j] == '$' ||
-			env[i][j] == '\"')
+			if (env[i][j] == '\\' || env[i][j] == '$'
+				|| env[i][j] == '\"')
 				write(1, "\\", 1);
 			write(1, &env[i][j], 1);
 			if (env[i][j] == '=' && equal-- == 1)
