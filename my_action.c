@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action.c                                           :+:      :+:    :+:   */
+/*   my_action.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 02:34:49 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 02:43:19 by vzashev          ###   ########.fr       */
+/*   Created: 2024/02/22 09:42:44 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/02 18:19:14 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+ * Function: take_action
+ * ----------------------
+ * Determines the action to be taken based on the command entered.
+ *
+ * inputs: An array of strings containing the command and its arguments.
+ * s_hell: A pointer to the shell structure
+ * containing environment variables and flags.
+ */
 
 void	take_action(char **inputs, t_mini *s_hell)
 {

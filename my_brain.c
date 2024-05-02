@@ -5,12 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 18:47:33 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 02:34:41 by vzashev          ###   ########.fr       */
+/*   Created: 2024/02/02 13:38:56 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/02 18:19:12 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+ * Function: setup_fds
+ * --------------------
+ * Duplicates standard input and output file descriptors.
+ *
+ * newfd: An array to store the duplicated file descriptors.
+ */
 
 void	setup_fds(int newfd[2])
 {
@@ -18,18 +26,13 @@ void	setup_fds(int newfd[2])
 	newfd[1] = dup(0);
 }
 
-void	free_inputs(char **inputs)
-{
-	int	i;
-
-	i = 0;
-	while (inputs[i])
-	{
-		free(inputs[i]);
-		i++;
-	}
-	free(inputs);
-}
+/*
+ * Function: close_reds
+ * ---------------------
+ * Closes input and output file descriptors if they are not standard.
+ *
+ * s_hell: A pointer to the shell structure containing file descriptors.
+ */
 
 void	close_reds(t_mini *s_hell)
 {
@@ -45,18 +48,46 @@ void	close_reds(t_mini *s_hell)
 	}
 }
 
+/*
+ * Function: close_fds
+ * --------------------
+ * Closes file descriptors used for inter-process communication.
+ *
+ * oldfd: An array containing file descriptors to be closed.
+ */
+
 void	close_fds(int oldfd[2])
 {
 	close(oldfd[0]);
 	close(oldfd[1]);
 }
 
+/*
+ * Function: exit_pipe
+ * --------------------
+ * Frees memory and exits the shell process.
+ *
+ * s_hell: A pointer to the shell structure.
+ */
+
 void	exit_pipe(t_mini *s_hell)
 {
 	free_inputs(s_hell->envv);
-	free(s_hell->pwd);
 	exit(EXIT_SUCCESS);
 }
+
+/*
+ * Function: my_brain
+ * -------------------
+ * Executes the parsed input command and manages redirections and pipes.
+ *
+ * parsed_input: The parsed input command string.
+ * s_hell: A pointer to the shell structure
+ * containing environment variables and flags.
+ * piped: A flag indicating whether the command is piped.
+ *
+ * Returns: 0 on successful execution.
+ */
 
 int	my_brain(char *parsed_input, t_mini *s_hell, int piped)
 {

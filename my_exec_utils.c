@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*   my_exec_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 18:34:23 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 02:42:01 by vzashev          ###   ########.fr       */
+/*   Created: 2024/03/19 12:01:13 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/02 18:19:04 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+ * Function: gen_paths
+ * --------------------
+ * Generates an array of absolute paths
+ * by combining each path in the PATH environment variable
+ * with the input command.
+ *
+ * index: The index of the PATH environment variable
+ * in the shell environment variables array.
+ * s_hell: A pointer to the shell structure.
+ * input: The command to be executed.
+ *
+ * Returns: An array of absolute paths.
+ */
 
 char	**gen_paths(int index, t_mini *s_hell, char *input)
 {
@@ -35,6 +50,19 @@ char	**gen_paths(int index, t_mini *s_hell, char *input)
 	}
 	return (paths);
 }
+
+/*
+ * Function: check_exec_path
+ * --------------------------
+ * Checks if the command can be executed
+ * from any of the paths listed in the PATH environment variable.
+ *
+ * inputs: An array containing the command
+ * and its arguments.
+ * s_hell: A pointer to the shell structure.
+ *
+ * Returns: 1 if the command is executable, 0 otherwise.
+ */
 
 int	check_exec_path(char **inputs, t_mini *s_hell)
 {
@@ -63,6 +91,19 @@ int	check_exec_path(char **inputs, t_mini *s_hell)
 	free_envv(paths);
 	return (0);
 }
+
+/*
+ * Function: check_exec_status
+ * ----------------------------
+ * Checks the execution status of the command
+ * by verifying if it is executable
+ * from the current directory or the PATH environment variable.
+ *
+ * inputs: An array containing the command and its arguments.
+ * s_hell: A pointer to the shell structure.
+ *
+ * Returns: 1 if the command is executable, 0 otherwise.
+ */
 
 int	check_exec_status(char **inputs, t_mini *s_hell)
 {

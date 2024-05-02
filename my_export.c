@@ -5,12 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 18:45:44 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 02:42:18 by vzashev          ###   ########.fr       */
+/*   Created: 2024/05/02 23:01:59 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/02 22:19:01 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+ * Function: envv_index
+ * ---------------------
+ * Finds the index of an environment variable
+ * in the shell's environment variable array.
+ *
+ * name: The name of the environment variable to find.
+ * s_hell: A pointer to the shell structure containing
+ * the environment variable array.
+ *
+ * Returns: The index of the environment variable
+ * if found, otherwise -1.
+ */
 
 int	envv_index(char *name, t_mini *s_hell)
 {
@@ -33,6 +47,16 @@ int	envv_index(char *name, t_mini *s_hell)
 	return (-1);
 }
 
+/*
+ * Function: check_export
+ * -----------------------
+ * Checks if a string is a valid export format.
+ *
+ * str: The string to check.
+ *
+ * Returns: 1 if the string is a valid export format, 0 otherwise.
+ */
+
 int	check_export(char *str)
 {
 	int	i;
@@ -49,6 +73,17 @@ int	check_export(char *str)
 	return (1);
 }
 
+/*
+ * Function: replace_envv
+ * -----------------------
+ * Replaces an environment variable with a new value.
+ *
+ * new_var: The new value to set for the environment variable.
+ * s_hell: A pointer to the shell structure
+ * containing the environment variable array.
+ * index: The index of the environment variable to replace.
+ */
+
 void	replace_envv(char *new_var, t_mini *s_hell, int index)
 {
 	if (str_char(new_var, '='))
@@ -57,6 +92,17 @@ void	replace_envv(char *new_var, t_mini *s_hell, int index)
 		s_hell->envv[index] = dup_str(new_var);
 	}
 }
+
+/*
+ * Function: export_envv
+ * ----------------------
+ * Creates a new environment variable array with an additional variable.
+ *
+ * old_envv: The original environment variable array.
+ * export: The new environment variable to add.
+ *
+ * Returns: The new environment variable array.
+ */
 
 char	**export_envv(char **old_envv, char *export)
 {
@@ -79,6 +125,17 @@ char	**export_envv(char **old_envv, char *export)
 	return (new_envv);
 }
 
+/*
+ * Function: my_export
+ * --------------------
+ * Handles the export command,
+ * either replacing existing environment variables or adding new ones.
+ *
+ * inputs: The arguments passed to the export command.
+ * s_hell: A pointer to the shell structure containing
+ * the environment variable array.
+ */
+
 void	my_export(char **inputs, t_mini *s_hell)
 {
 	int	i;
@@ -99,11 +156,11 @@ void	my_export(char **inputs, t_mini *s_hell)
 					exit(EXIT_FAILURE);
 			}
 			else
-				return (print_error("export: bad identifier\n", 1));
+				return (print_error("Error: export: bad identifier!\n", 1));
 			i++;
 		}
 	}
 	else
 		export_alone(s_hell);
-	g_exit_status = 0;
+	g_exit = 0;
 }

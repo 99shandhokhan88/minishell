@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   my_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 19:22:47 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 02:42:21 by vzashev          ###   ########.fr       */
+/*   Created: 2024/03/10 15:12:18 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/02 18:50:20 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+   This function removes the specified environment variable
+   from the environment array.
+   It creates a new environment array
+   with one less element, copies all elements except
+   the one to be removed from the old array
+   to the new one, and frees the memory of the old array.
+   The function returns the new environment array.
+*/
 
 char	**unset_envv(char **old_env, int index)
 {
@@ -38,6 +48,17 @@ char	**unset_envv(char **old_env, int index)
 	return (new_env);
 }
 
+/*
+   This function is responsible for unsetting
+   environment variables specified in the inputs array.
+   It iterates through the inputs array,
+   checks if each input is a valid environment variable identifier,
+   finds the index of the corresponding
+   environment variable in the environment array,
+   and removes it
+   using the unset_envv function.
+*/
+
 void	my_unset(char **inputs, t_mini *s_hell)
 {
 	int	i;
@@ -54,6 +75,6 @@ void	my_unset(char **inputs, t_mini *s_hell)
 			i++;
 		}
 		else
-			return (print_error("unset: invalid identifier\n", 1));
+			return (print_error("Error: unset: invalid identifier!\n", 1));
 	}
 }

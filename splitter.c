@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 18:50:59 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 02:35:42 by vzashev          ###   ########.fr       */
+/*   Created: 2024/05/02 18:02:58 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/02 18:18:49 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*next_input(char *str)
 {
 	char	quote;
-	int		slash_count;
+	int		slash;
 
 	str--;
 	while (*(++str))
@@ -25,8 +25,8 @@ char	*next_input(char *str)
 			quote = *(str++);
 			while (*str != quote)
 			{
-				slash_count = 0;
-				if (slash_count && !(slash_count % 2))
+				slash = 0;
+				if (slash && !(slash % 2))
 					str--;
 				str++;
 			}
@@ -41,7 +41,7 @@ size_t	words_count(char *str)
 {
 	int		i;
 	char	quote;
-	int		slash_count;
+	int		slash;
 
 	i = 1;
 	str--;
@@ -52,8 +52,8 @@ size_t	words_count(char *str)
 			quote = *(str++);
 			while (*str != quote)
 			{
-				slash_count = 0;
-				if (slash_count && !(slash_count % 2))
+				slash = 0;
+				if (slash && !(slash % 2))
 					str--;
 				str++;
 			}

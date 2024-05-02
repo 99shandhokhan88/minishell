@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   my_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 18:28:26 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 01:37:58 by vzashev          ###   ########.fr       */
+/*   Created: 2024/03/12 14:01:57 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/02 22:18:44 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+ * Function: my_echo
+ * ------------------
+ * Displays the arguments passed to the function.
+ *
+ * args: An array containing the command and arguments to be echoed.
+ */
 
 void	my_echo(char **args)
 {
@@ -19,7 +27,7 @@ void	my_echo(char **args)
 
 	i = 1;
 	n_flag = 0;
-	g_exit_status = 0;
+	g_exit = 0;
 	while (args[i] && !comp_str(args[i], "-n") && i++)
 		n_flag = 1;
 	while (args[i])

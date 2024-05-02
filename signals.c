@@ -5,24 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 19:21:07 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 00:34:29 by vzashev          ###   ########.fr       */
+/*   Created: 2024/05/02 13:02:24 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/02 22:19:15 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+   This function handles the SIGINT signal (Ctrl+C)
+   by setting up a signal handler.
+   When the SIGINT signal is received,
+   it sets the global exit status to 130 (indicating termination by Ctrl+C),
+   prints a newline character to start a new line,
+   clears the current input line using rl_replace_line(),
+   moves the cursor to the beginning
+   of the line using rl_on_new_line(),
+   and redisplays the line using rl_redisplay().
+*/
+
 void	handle_ctrl_c(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_exit_status = 130;
+		g_exit = 130;
 		printf("\n");
-		rl_replace_line("", 0);
+		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
 	}
 }
+
+/*
+   This function sets up the signal handlers
+   for SIGINT (Ctrl+C), SIGQUIT, and SIGTSTP.
+   It ignores SIGQUIT and SIGTSTP signals.
+*/
 
 void	setup_signals(void)
 {
@@ -31,10 +49,17 @@ void	setup_signals(void)
 	signal(SIGTSTP, SIG_IGN);
 }
 
+/*
+   This function handles the termination
+   of the shell when Ctrl+D is pressed.
+   It frees the allocated memory
+   for the shell structure, input buffer, and exits with the global exit status.
+*/
+
 void	handle_ctrl_d(t_mini *s_hell, char *input)
 {
 	free_shell(s_hell);
 	if (input)
 		free(input);
-	exit(g_exit_status);
+	exit(g_exit);
 }

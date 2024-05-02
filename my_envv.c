@@ -5,12 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 18:29:16 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 02:44:42 by vzashev          ###   ########.fr       */
+/*   Created: 2024/02/05 08:50:10 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/02 22:18:46 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+ * Function: init_envv
+ * --------------------
+ * Initializes the shell environment variables from the given array.
+ *
+ * envv: An array containing environment variable strings.
+ * s_hell: A pointer to the shell structure.
+ *
+ * Returns: 0 on success, 1 on failure.
+ */
 
 int	init_envv(char *envv[], t_mini *s_hell)
 {
@@ -32,6 +43,16 @@ int	init_envv(char *envv[], t_mini *s_hell)
 	return (0);
 }
 
+/*
+ * Function: dup_env
+ * ------------------
+ * Duplicates the environment variable array.
+ *
+ * envv: An array containing environment variable strings.
+ *
+ * Returns: A duplicate of the environment variable array.
+ */
+
 char	**dup_env(char **envv)
 {
 	char	**s_hell_envv;
@@ -49,6 +70,14 @@ char	**dup_env(char **envv)
 	s_hell_envv[i] = 0;
 	return (s_hell_envv);
 }
+
+/*
+ * Function: my_envv
+ * -------------------
+ * Displays the current environment variables.
+ *
+ * envv: An array containing environment variable strings.
+ */
 
 void	my_envv(char **envv)
 {
@@ -72,7 +101,5 @@ void	my_envv(char **envv)
 		}
 		i++;
 	}
-	g_exit_status = 0;
+	g_exit = 0;
 }
-
-
