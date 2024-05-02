@@ -3,125 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzashev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 18:54:49 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/01 18:56:37 by vzashev          ###   ########.fr       */
+/*   Created: 2024/05/02 01:09:25 by vzashev           #+#    #+#             */
+/*   Updated: 2024/05/02 01:20:26 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	quote_len(char **str, int *i, char quote)
+int	pipe_pars(char *input, int pipe_pos, t_mini *s_hell)
 {
-	int	slash_count;
+	char	*new_input;
+	int		space;
 
-	while (**str != quote && **str)
-	{
-		slash_count = 0;
-		if (slash_count && !(slash_count % 2))
-		{
-			(*str)--;
-			(*i)--;
-		}
-		(*i)++;
-		(*str)++;
-	}
+	space = 0;
+	if (input[pipe_pos - 1] == ' ')
+		space = 1;
+	new_input = dup_str(&input[pipe_pos + 1]);
+	input[pipe_pos - space] = '\0';
+	return (my_pipe(input, new_input, s_hell));
 }
 
-static int	input_len(char *str)
+int	check_pipe_or_dollar(char **input, int *i, t_mini *s_hell)
+{
+	if ((*input)[*i] == '|')
+	{
+		pipe_pars((*input), *i, s_hell);
+		return (1);
+	}
+	if ((*input)[*i] == '$')
+		expander(s_hell, input, i);
+	if ((*input)[*i] == '\'')
+	{
+		(*i)++;
+	}
+	(*i)++;
+	return (0);
+}
+
+int	parser(t_mini *s_hell, char *lexer_input, int pipe)
 {
 	int		i;
-	char	quote;
+	int		slash;
 
 	i = 0;
-	while (*str)
+	slash = 0;
+	while (lexer_input[i])
 	{
-		if (*str == ' ' && (*(str + 1) == ' ' || *(str + 1) == '\0'))
-			str++;
-		else if (*str == '"' || *str == '\'')
+		if ((lexer_input[i] == '"') || (lexer_input[i] == '\''))
 		{
-			quote = *(str++);
-			quote_len(&str, &i, quote);
-			if (!*str)
-				return (-1);
-			str++;
-			i = i + 2;
-		}
-		else if (str++)
 			i++;
-	}
-	return (i);
-}
-
-void	copy_inside_quotes(char **src, char **dst, char quote)
-{
-	int	slash_count;
-
-	while (**src != quote)
-	{
-		slash_count = 0;
-		if (slash_count && !(slash_count % 2))
-			*((*dst)--) = *((*src)--);
-		*((*dst)++) = *((*src)++);
-	}
-}
-
-void	input_copy(char *dst, char *src)
-{
-	char	quote;
-
-	while (*src)
-	{
-		if (*src == ' ' && (*(src + 1) == ' ' || *(src + 1) == '\0'))
-			src++;
-		else if (*src == '"' || *src == '\'')
-		{
-			*(dst++) = *src;
-			quote = *(src++);
-			copy_inside_quotes(&src, &dst, quote);
-			*(dst++) = *(src++);
+			while ((lexer_input[i] != '"') && (lexer_input[i] != '\''))
+			{
+				slash = 0;
+				if ((lexer_input[i] == '$') && (!(slash % 2))
+				&& ((lexer_input[i - 1] != '\'')))
+					expander(s_hell, &lexer_input, &i);
+				if (slash && !(slash % 2))
+					i--;
+				i++;
+			}
 		}
-		else
-			*(dst++) = *(src++);
+		if (check_pipe_or_dollar(&lexer_input, &i, s_hell))
+			return (0);
 	}
-	*dst = '\0';
-}
-
-char	*input_cleaner(char *str)
-{
-	int		len;
-	char	*clean_input;
-	char	*str_start;
-
-	str_start = str;
-	while (*str == ' ' && *str)
-		str++;
-	len = input_len(str);
-	if (len == -1)
-		return (0);
-	clean_input = (char *)malloc((len + 1) * sizeof(char));
-	if (!clean_input)
-		exit(EXIT_FAILURE);
-	input_copy(clean_input, str);
-	free(str_start);
-	return (clean_input);
-}
-
-int	parser_start(char *input, t_data *data)
-{
-	char	*clean_input;
-
-	clean_input = input_cleaner(input);
-	if (clean_input == NULL)
-	{
-		printf("This minishell does not support multiline\n");
-		return (0);
-	}
-	if (!*clean_input)
-	{
-		free(clean_input);
-		return (0);
-	}
-	return (parser_delegator(clean_input, data, 0));
+	return (my_brain(lexer_input, s_hell, pipe));
 }

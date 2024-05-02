@@ -1,48 +1,30 @@
 
-SRCS	= main.c
+SRCS = action.c expander.c lexer_utils.c lexer.c main.c my_brain_utils.c my_brain.c my_cd_utils.c my_cd.c my_echo.c my_envv.c my_exec_utils.c my_exec.c my_exit.c my_export_utils.c my_export.c my_pwd.c my_unset.c parser_redir2.c parser.c pipes.c redirections.c signals.c splitter.c utils.c
 
-SRCS	+= parser.c input_split.c input_split2.c parser_delegator.c parser_variable.c parser_redir.c
+CC = gcc
 
-SRCS	+= utils.c parser_redir2.c handle_basic.c parser_error.c
+CFLAGS = -Wall -Werror -Wextra -g
 
-SRCS	+= echo.c pwd.c cd_utils.c cd.c exec.c exec_utils.c env.c
+LDFLAGS = -lreadline
 
-SRCS	+= export.c export_utils.c unset.c pipe.c signal.c exit.c
+OBJS = $(SRCS:.c=.o)
 
-LIBFT	= libft/libft.a
+EXEC = minishell
 
-OBJS	= $(SRCS:.c=.o)
+.PHONY: all clean fclean re
 
-NAME	= minishell
+all: $(EXEC)
 
-LIBFT	= libft/libft.a
-
-CLANG	= gcc -g
-
-FLAGS	= -Wall -Wextra -Werror
-
-INCLUDE	= -L libft -lft -lreadline
-
-
-
-
-all:	$(NAME)
-
-.PHONY:	clean fclean re bonus bench bclean
-
-$(NAME): $(OBJS)
-	cd libft && $(MAKE)
-	$(CLANG) $(FLAGS) -o $(NAME) $(OBJS) $(INCLUDE)
-
-clean:
-	rm -f $(OBJS) $(B_OBJS)
-	cd libft && $(MAKE) clean
-
-fclean: clean
-	rm -f $(NAME) $(BONUS)
-	cd libft && $(MAKE) fclean
-
-re: fclean all
+$(EXEC): $(OBJS)
+	$(CC) $^ -o $@ $(LDFLAGS)
 
 %.o: %.c
-	$(CLANG) $(FLAGS) -c $<  -o $(<:.c=.o)
+	$(CC) $(CFLAGS) -c $<
+
+clean:
+	rm -f $(OBJS)
+
+fclean: clean
+	rm -f $(EXEC)
+
+re: fclean all
