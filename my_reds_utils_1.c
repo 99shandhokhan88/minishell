@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:09:00 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 22:19:09 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:00:33 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	red_in(char *str, int i, char **input, t_mini *s_hell)
 	free(filename);
 	if (fd < 0)
 	{
-		print_str_fd("Error: wrong permissions!\n", 2);
+		print_str_fd("minishell: wrong permissions\n", 2);
 		g_exit = 1;
 		s_hell->red = 0;
 		return ;
@@ -79,7 +79,7 @@ void	red_append(char *str, int i, char **input, t_mini *s_hell)
 	free(filename);
 	if (fd < 0)
 	{
-		print_str_fd("Error: wrong permissions!\n", 2);
+		print_str_fd("minishell: wrong permissions\n", 2);
 		g_exit = 1;
 		s_hell->red = 0;
 		return ;
@@ -118,7 +118,7 @@ void	red_out(char *str, int i, char **input, t_mini *s_hell)
 	free(filename);
 	if (fd < 0)
 	{
-		print_str_fd("Error: wrong file name and/or wrong permissions!\n", 2);
+		print_str_fd("minishell: wrong file name or wrong permissions\n", 2);
 		g_exit = 1;
 		s_hell->red = 0;
 		return ;

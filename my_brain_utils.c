@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:00:18 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 22:18:37 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 13:38:06 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	my_error(char *input)
 			if (check_reds(input, &i, input[i]))
 			{
 				g_exit = 1;
-				printf("Error: wrong or unsupported redirection!\n");
+				printf("minishell$: error: wrong redirection\n");
 				return (1);
 			}
 		}

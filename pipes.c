@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:30:21 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 22:21:36 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:29:53 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
    at the position of the pipe,
    creates a new process to execute the first part,
    and sets up inter-process communication
-   using a pipe. It then calls my_brain() to execute the second part
-   in the child process
+   using a pipe. It then calls my_brain() to execute
+   the second part in the child process
    and recursively invokes my_pipe() to handle additional pipes.
 */
 
@@ -58,6 +58,7 @@ int	check_pipe_or_dollar(char **input, int *i, t_mini *s_hell)
 	if ((*input)[*i] == '\'')
 	{
 		(*i)++;
+		return (0);
 	}
 	(*i)++;
 	return (0);
@@ -101,7 +102,7 @@ int	my_pipe(char *input1, char *input2, t_mini *s_hell)
 
 	if (pipe(fds) == -1)
 	{
-		perror("Error: pipe error!\n");
+		perror("minishell: pipe error\n");
 		exit(EXIT_FAILURE);
 	}
 	pid = fork();
@@ -113,10 +114,11 @@ int	my_pipe(char *input1, char *input2, t_mini *s_hell)
 		close(fds[1]);
 		my_brain(input1, s_hell, 1);
 	}
-	else if (pid < 0)
-		exit(EXIT_FAILURE);
 	else
+	{
+		free(input1);
 		handle_parents(input2, s_hell, fds);
+	}
 	waitpid(-1, NULL, 0);
 	return (1);
 }

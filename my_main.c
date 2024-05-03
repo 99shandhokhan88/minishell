@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:18:42 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 22:57:36 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 18:07:52 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int	main(int argc, char *argv[], char *envv[])
 	{
 		setup_signals();
 		input = readline("minishell$: ");
-		if (input && input[0] && custom_strspn(input, " ") != len_str(input))
-			add_history(input);
 		if (input == NULL)
 			handle_ctrl_d(&s_hell, input);
+		if (input && input[0] && custom_strspn(input, " ") != len_str(input))
+			add_history(input);
 		if (check_pipe_at_beginning(input))
 			continue ;
 		if (input && input[0] && custom_strspn(input, " ") != len_str(input))

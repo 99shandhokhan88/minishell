@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:18:39 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 18:18:57 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:33:34 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int	my_lexer(t_mini *s_hell, char *input)
 	char	*formatted_input;
 
 	formatted_input = format_input(input);
+	free(input);
 	if (formatted_input == NULL)
 	{
-		printf("Error: this minishell doesn't support multiline!\n");
+		printf("minishell$: multiline not supported\n");
 		return (0);
 	}
 	if (!(*formatted_input))

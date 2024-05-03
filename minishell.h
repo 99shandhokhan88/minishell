@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 10:10:39 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 22:18:27 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:40:35 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	change_my_pwd(t_mini *s_hell);
 int		cd_one(t_mini *s_hell);
 int		cd_two(t_mini *s_hell);
 int		cd_pwd(char **args, t_mini *s_hell);
+void	osema(int cur_fd[2], t_mini *s_hell);
 void	my_cd(char **args, t_mini *s_hell);
 void	my_echo(char **args);
 int		init_envv(char *envv[], t_mini *s_hell);

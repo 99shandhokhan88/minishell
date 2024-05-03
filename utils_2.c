@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 18:36:35 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 18:18:47 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 16:31:22 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	check_pipe_at_beginning(char *input)
 		return (0);
 	if (input[0] == '|')
 	{
-		printf("Error: wrong syntax!\n");
+		printf("minishell: wrong syntax\n");
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 19:46:00 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 23:06:03 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 16:36:06 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	my_exit(char **inputs, t_mini *s_hell)
 		if (is_number(inputs[1]))
 		{
 			if (inputs[2])
-				return (print_error("Error: exit: wrong arguments!\n", 2));
+				return (print_error("minishell$: exit: wrong argument\n", 2));
 			g_exit = my_atoi(inputs[1]);
 			if (g_exit > 255)
 				g_exit = 255;
@@ -38,12 +38,9 @@ void	my_exit(char **inputs, t_mini *s_hell)
 				g_exit = 255;
 		}
 		else
-			print_error("Error: exit: numeric argument required!\n", 2);
+			print_error("minishell$: exit: numeric argument required\n", 2);
 	}
-	///free(inputs);
-	free_shell(s_hell);
+	free_inputs(s_hell->envv);
 	free_inputs(inputs);
-	//free_envv(inputs);
-	//free_envv(s_hell->envv);
 	exit(g_exit);
 }

@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:21:10 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 22:20:52 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 13:39:56 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void	change_env_pwd(t_mini *s_hell, char **cwd)
 
 	pwd = join_str("PWD=", *cwd);
 	if (!pwd)
-		printf("Error: failed allocation PWD!\n");
+		printf("minishell$: PWD: failed allocation\n");
 	old_pwd = join_str("OLD", pwd);
 	if (!old_pwd)
 	{
-		printf("Error: failed allocation OLDPWD!\n");
+		printf("minishell$: OLDPWD: failed allocation\n");
 		free(pwd);
 	}
 	replace_envv(old_pwd, s_hell, envv_index("OLDPWD=", s_hell));
@@ -115,7 +115,7 @@ void	change_my_pwd(t_mini *s_hell)
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		printf("Error: undefined current directory!\n");
+		printf("minishell$: PWD: undefined current directory\n");
 	change_env_pwd(s_hell, &cwd);
 	if (envv_index("PWD", s_hell) >= 0)
 	{

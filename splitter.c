@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 18:02:58 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 18:18:49 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 15:28:10 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	**split_input(char *str)
 	size_t	i;
 
 	count = words_count(str);
-	inputs = malloc((count + 1) * sizeof(char *));
+	inputs = alloc_with_zero((count + 1), sizeof(char *));
 	if (!inputs)
 		exit(EXIT_FAILURE);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:38:56 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 18:19:12 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:39:49 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,12 @@ void	exit_pipe(t_mini *s_hell)
  * Returns: 0 on successful execution.
  */
 
-int	my_brain(char *parsed_input, t_mini *s_hell, int piped)
+int	my_brain(char *parsed_input, t_mini *s_hell, int pipe)
 {
 	char	**inputs;
 	int		cur_fd[2];
+	char	*test1;
+	char	*test2;
 
 	if (my_error(parsed_input))
 	{
@@ -100,20 +102,18 @@ int	my_brain(char *parsed_input, t_mini *s_hell, int piped)
 		return (0);
 	}
 	setup_fds(cur_fd);
-	parsed_input = format_input(parsed_input);
-	my_redirections(&parsed_input, s_hell);
-	parsed_input = format_input(parsed_input);
-	inputs = split_input(parsed_input);
-	if (!inputs)
-		exit(EXIT_FAILURE);
+	test1 = format_input(parsed_input);
 	free(parsed_input);
+	my_redirections(&test1, s_hell);
+	test2 = format_input(test1);
+	free(test1);
+	inputs = split_input(test2);
+	free(test2);
 	take_action(inputs, s_hell);
 	free_inputs(inputs);
-	dup2(cur_fd[0], 1);
-	dup2(cur_fd[1], 0);
-	close_reds(s_hell);
+	osema(cur_fd, s_hell);
 	close_fds(cur_fd);
-	if (piped)
+	if (pipe)
 		exit_pipe(s_hell);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 18:02:14 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 18:50:38 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 13:42:20 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	handle_reds(char **input, int i, t_mini *s_hell)
 		in = open(".tmp.txt", O_RDONLY);
 		if (in == -1)
 		{
-			printf("Error: not opening temporary file for reading!\n");
+			printf("minishell: not opening temporary file for reading\n");
 			return ;
 		}
 		dup2(in, 0);

@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 23:01:59 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 22:19:01 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 13:41:18 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void	my_export(char **inputs, t_mini *s_hell)
 					exit(EXIT_FAILURE);
 			}
 			else
-				return (print_error("Error: export: bad identifier!\n", 1));
+				return (print_error("minishell$: export: bad identifier\n", 1));
 			i++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 21:11:16 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 22:23:01 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 13:40:31 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	my_exec(char **inputs, t_mini *s_hell)
 
 	status = 0;
 	if (!(check_exec_status(inputs, s_hell)))
-		return (print_error("Error: command not found!\n", 127));
+		return (print_error("minishell$: command not found\n", 127));
 	pid = fork();
 	if (pid == 0)
 	{

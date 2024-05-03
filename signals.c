@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 13:02:24 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 22:19:15 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:51:21 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	handle_ctrl_c(int sig)
 	{
 		g_exit = 130;
 		printf("\n");
-		rl_replace_line("", 1);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -53,7 +53,8 @@ void	setup_signals(void)
    This function handles the termination
    of the shell when Ctrl+D is pressed.
    It frees the allocated memory
-   for the shell structure, input buffer, and exits with the global exit status.
+   for the shell structure, input buffer,
+   and exits with the global exit status.
 */
 
 void	handle_ctrl_d(t_mini *s_hell, char *input)
@@ -62,4 +63,11 @@ void	handle_ctrl_d(t_mini *s_hell, char *input)
 	if (input)
 		free(input);
 	exit(g_exit);
+}
+
+void	osema(int cur_fd[2], t_mini *s_hell)
+{
+	dup2(cur_fd[0], 1);
+	dup2(cur_fd[1], 0);
+	close_reds(s_hell);
 }

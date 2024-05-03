@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 11:23:29 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 22:18:59 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:47:21 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,8 @@ void	expander(t_mini *s_hell, char **input_parsed, int *i)
 	free(new_input);
 	new_input = join_str(temp, &(input_parsed[0][*i + 1 + len]));
 	len = len_str(value);
+	free(value);
 	free(temp);
-	//free(value);
 	free(*input_parsed);
 	*input_parsed = new_input;
 	*i += len - 1;

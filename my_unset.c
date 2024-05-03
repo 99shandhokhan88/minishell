@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 15:12:18 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 18:50:20 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:02:53 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void	my_unset(char **inputs, t_mini *s_hell)
 			i++;
 		}
 		else
-			return (print_error("Error: unset: invalid identifier!\n", 1));
+			return (print_error("minishell: unset: invalid identifier\n", 1));
 	}
 }

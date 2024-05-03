@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 18:01:03 by vzashev           #+#    #+#             */
-/*   Updated: 2024/05/02 22:18:42 by vzashev          ###   ########.fr       */
+/*   Updated: 2024/05/03 19:01:30 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,25 @@
 
 void	my_cd(char **args, t_mini *s_hell)
 {
-	if (args[2])
-		return (print_error("Error cd: not corrrect arguments!\n", 1));
-	else if (!args[1])
+	if (!args[1])
 	{
 		if (!cd_one(s_hell))
-			return (print_error("Error cd: HOME: undefined!\n", 1));
+			print_error("minishell$: HOME: undefined\n", 1);
 	}
-	else if (comp_str(args[1], "-") == 0)
+	else if (!args[2])
 	{
-		if (!cd_two(s_hell))
-			return (print_error("Error cd: PWD: undefined!\n", 1));
+		if (!comp_str(args[1], "-"))
+		{
+			if (!cd_two(s_hell))
+				print_error("minishell$: PWD: undefined\n", 1);
+		}
+		else
+		{
+			if (!cd_pwd(args, s_hell))
+				print_error("minishell$: cd: no such file or directory\n", 1);
+		}
 	}
 	else
-	{
-		if (!cd_pwd(args, s_hell))
-			return (print_error("Error cd: no such file or directory!\n", 1));
-	}
+		print_error("minishell$: cd: not correct arguments\n", 1);
 	g_exit = 0;
 }
